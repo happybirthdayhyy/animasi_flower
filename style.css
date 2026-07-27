@@ -1038,3 +1038,121 @@ body {
     animation-iteration-count: 1 !important;
   }
 }
+/* Variabel Warna Khusus Amplop */
+:root {
+    --env-bg: #EAE0C8;         
+    --env-flap: #D6C7AA;       
+    --env-front-1: #E3D4B6;    
+    --env-front-2: #DCC9A8;    
+    --letter-bg: #FFFFFF;      
+}
+
+/* Struktur Amplop Utama */
+.envelope-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    height: 200px;
+    cursor: pointer;
+    z-index: 10;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0 auto; /* Menengahkan amplop jika tidak menggunakan flexbox di body */
+}
+
+.envelope-back {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--env-bg);
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* Surat di dalam amplop */
+.letter {
+    position: absolute;
+    bottom: 5px; 
+    left: 5%;
+    width: 90%;
+    height: 180px; 
+    background: var(--letter-bg);
+    border-radius: 5px;
+    z-index: 2; 
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transform: translateY(0); 
+    transition: transform 0.8s ease-in-out 0.6s, height 0.8s ease-in-out 0.6s;
+}
+
+.letter img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    background-color: #f0f0f0; 
+    opacity: 0; 
+    transition: opacity 0.5s ease-in 1.2s; 
+}
+
+.letter p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in 1.2s;
+}
+
+/* Sisi Depan Amplop */
+.envelope-front-left {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--env-front-1);
+    clip-path: polygon(0 0, 50% 50%, 0 100%);
+    z-index: 3; pointer-events: none;
+    border-radius: 0 0 0 5px;
+}
+
+.envelope-front-right {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--env-front-1);
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+    z-index: 3; pointer-events: none;
+    border-radius: 0 0 5px 0;
+}
+
+.envelope-front-bottom {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--env-front-2);
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    z-index: 3; pointer-events: none;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Tutup Amplop Atas */
+.flap {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--env-flap);
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    z-index: 4; 
+    transform-origin: top;
+    transition: transform 0.6s ease-in-out, z-index 0s linear 0.3s;
+    pointer-events: none;
+}
+
+/* KETIKA AMPLOP DIKLIK */
+.envelope-wrapper.is-open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.is-open .letter {
+    height: 270px; 
+    transform: translateY(-160px); 
+}
+
+.envelope-wrapper.is-open .letter img,
+.envelope-wrapper.is-open .letter p {
+    opacity: 1; 
+}
