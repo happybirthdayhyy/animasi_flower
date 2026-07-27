@@ -17,6 +17,8 @@ body {
   min-height: 100vh;
   background-color: var(--dark-color);
   overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
   perspective: 1000px;
 }
 
