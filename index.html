@@ -605,13 +605,34 @@
   </div>
 
   <script>
-    setTimeout(() => { document.body.classList.remove('not-loaded'); }, 1000);
+setTimeout(() => {
+  document.body.classList.remove('not-loaded');
+}, 1000);
 
-    const envelope = document.getElementById('envelope-wrapper');
-    let isOpened = false;
-    envelope.addEventListener('click', () => {
-      if (!isOpened) { envelope.classList.add('is-open'); isOpened = true; }
-    });
+const envelope = document.getElementById('envelope-wrapper');
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+let isOpened = false;
+
+envelope.addEventListener('click', () => {
+  if (!isOpened) {
+    envelope.classList.add('is-open');
+    music.play().catch(err => console.log(err));
+    musicBtn.textContent = "🔊";
+    isOpened = true;
+  }
+});
+
+musicBtn.addEventListener('click', () => {
+  if (music.paused) {
+    music.play();
+    musicBtn.textContent = "🔊";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🔇";
+  }
+});
   </script>
   <audio id="bgMusic" loop>
     <source src="ssstik.io_1784980644063.mp3" type="audio/mpeg">
